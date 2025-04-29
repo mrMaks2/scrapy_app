@@ -103,23 +103,7 @@ class AlkotekaDownloaderMiddleware:
         spider.logger.info("Spider opened: %s" % spider.name)
 
 
-from selenium import webdriver
-from scrapy.http import HtmlResponse
-import time
-
 # class ProxyMiddleware:
 #     def process_request(self, request, spider):
-#         request.meta['proxy'] = spider.settings.get('PROXY')
-
-class SeleniumMiddleware:
-    def __init__(self):
-        self.driver = webdriver.Chrome()
-
-    def process_request(self, request, spider):
-        self.driver.get(request.url)
-        time.sleep(2)
-        body = self.driver.page_source
-        return HtmlResponse(self.driver.current_url, body=body, encoding='utf-8', request=request)
-
-    def spider_closed(self, spider):
-        self.driver.quit()
+#         if spider.settings.get('PROXY_POOL_ENABLED'):
+#             request.meta['proxy'] = spider.settings.get('PROXY')
